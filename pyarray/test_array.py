@@ -3,7 +3,7 @@ import time
 import random
 import numpy as np
 
-if __name__ == '__main__':
+def test_performance():
     mod, size = 10000, 100000
     a = [random.randint(-mod, mod) for _ in range(size)]
     b = [random.randint(-mod, mod) for _ in range(size)]
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     print('numpy time:\t{:.5f}'.format(p2-p1))
     print('pyarray time:\t{:.5f}'.format(p3-p2))
 
-    print('check test:')
+def test_sum():
     a, b = [1,2,3], [1,3,7]
     a1, b1 = pyarray.array(a), pyarray.array(b)
     print(a1)
@@ -32,4 +32,8 @@ if __name__ == '__main__':
     print(b1)
     print('=')
     print(a1+b1)
+
+if __name__ == '__main__':
+    test_performance()
+    test_sum()
 

@@ -14,7 +14,9 @@ cdef class array:
                 self.c_obj.PushBack(elem)
 
     def push_back(self, elem):
-        return self.c_obj.PushBack(elem)
+        if isinstance(elem, int):
+            return self.c_obj.PushBack(elem)
+        raise RuntimeError("Only int is supported")
     
     def pop_back(self):
         return self.c_obj.PopBack()
@@ -23,7 +25,11 @@ cdef class array:
         return self.c_obj.GetSize()
 
     def __getitem__(self, key):
-        return self.c_obj.at(key)
+        if isinstance(key, int):
+            if (key < 0) or (key >= self.c_obj.GetSize()):
+                raise RuntimeError("key is out of bounds")
+            return self.c_obj.at(key)
+        raise RuntimeError("key should be int")
 
     def __add__(one, other):
         v1 = <array>one
